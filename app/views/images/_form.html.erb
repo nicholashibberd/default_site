@@ -1,0 +1,23 @@
+<%= form_for([@gallery, @image], {:html => {:multipart => true}}) do |f| %>
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+	<div class="field">
+    <%= f.hidden_field :image_type, :value => 'GalleryImage' %>
+  </div>
+	<div class="field">
+    <%= f.label :image_file %>
+    <%= f.file_field :file %>
+    <%= f.hidden_field :file_cache %>
+  </div>
+	<% unless @image.new_record? %>
+	 	<div>
+			<%= image_tag @image.image.file.url %>
+		</div>
+	<% end %>
+
+	<div class="button confirm_button">
+  	<%= f.submit :class => 'btn btn-success' %>
+	</div>
+<% end %>

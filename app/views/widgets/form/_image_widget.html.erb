@@ -1,0 +1,30 @@
+<div class="field">
+  <%= f.label :width %>
+  <%= f.text_field :width %>
+</div>
+
+<div class="field">
+  <%= f.label :height %>
+  <%= f.text_field :height %>
+</div>
+
+<div class="field">
+  <%= f.label :caption %>
+  <%= f.text_field :caption %>
+</div>
+
+<div class="field">
+  <%= f.label :link %>
+  <%= f.text_field :link %>
+</div>
+
+<div class="field">
+  <%= f.label :display_in_lightbox %>
+  <%= f.select :display_in_lightbox, options_for_select([['Yes', true], ['No', false]], widget.display_in_lightbox) %>
+</div>
+
+<div class="field">
+  <%= f.label :image_file %>
+  <%= f.file_field :file %>
+  <%= f.hidden_field :file_cache %>
+</div>
