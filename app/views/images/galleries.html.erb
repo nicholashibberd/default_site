@@ -5,7 +5,7 @@
 <section class="page_content">
 	<% Image::GALLERIES.each do |gallery| %>
 		<div class="index_item">
-			<%= link_to gallery[:name].titleize, gallery_images_path(:gallery_id => gallery[:name]) %>
+			<%= link_to gallery[:name].titleize, images_path(:gallery => gallery[:name]) %>
 		</div>
 	<% end %>
 </section>

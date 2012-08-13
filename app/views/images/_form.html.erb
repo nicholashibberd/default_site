@@ -1,10 +1,10 @@
-<%= form_for([@gallery, @image], {:html => {:multipart => true}}) do |f| %>
+<%= form_for(@image, {:url => image_form_path(@gallery, @image), :html => {:multipart => true}}) do |f| %>
   <div class="field">
     <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
 	<div class="field">
-    <%= f.hidden_field :image_type, :value => 'GalleryImage' %>
+    <%= f.hidden_field :gallery, :value => @gallery %>
   </div>
 	<div class="field">
     <%= f.label :image_file %>
@@ -13,7 +13,7 @@
   </div>
 	<% unless @image.new_record? %>
 	 	<div>
-			<%= image_tag @image.image.file.url %>
+			<%= image_tag @image.file.url %>
 		</div>
 	<% end %>
 

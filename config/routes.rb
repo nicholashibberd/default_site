@@ -1,14 +1,14 @@
 DefaultSite::Application.routes.draw do
   scope 'admin' do
     resources :documents
+    resources :galleries do
+      resources :images
+    end
     resources :pages do
       resources :widgets
     end
     resources :nav_menus do
       resources :nav_items
-    end
-    resources :galleries do
-      resources :images
     end
     resources :users do
       member do
