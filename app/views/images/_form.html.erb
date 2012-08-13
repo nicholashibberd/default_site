@@ -6,6 +6,18 @@
 	<div class="field">
     <%= f.hidden_field :gallery, :value => @gallery %>
   </div>
+	
+	<% if @gallery_info[:variable] %>
+	  <div class="field">
+	    <%= f.label :width %>
+	    <%= f.text_field :width %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :height %>
+	    <%= f.text_field :height %>
+	  </div>
+	<% end %>
+	
 	<div class="field">
     <%= f.label :image_file %>
     <%= f.file_field :file %>

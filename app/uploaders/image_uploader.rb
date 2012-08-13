@@ -20,15 +20,17 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
   def dimensions_valid? image
-    
-    model.width.is_a?(Integer) && model.height.is_a?(Integer) 
+    collection_image? && model.width.is_a?(Integer) && model.height.is_a?(Integer) 
   end
   
   def gallery_image? image
-    gallery = Image::GALLERIES[model.gallery]
-    gallery.type == 'gallery'
+    model.gallery_type == 'gallery'
   end
-    
+  
+  def collection_image?
+    model.gallery_type == 'collection'
+  end
+  
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end

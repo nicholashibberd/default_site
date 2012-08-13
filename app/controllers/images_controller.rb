@@ -41,5 +41,6 @@ class ImagesController < AdminController
 
   def set_gallery
     @gallery = params[:gallery_id] 
+    @gallery_info = Image::GALLERIES[@gallery]
   end
 end
