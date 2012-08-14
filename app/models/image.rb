@@ -1,28 +1,32 @@
 class Image
   include Mongoid::Document
+  default_scope asc(:position)
   
   field :name
-  field :gallery, :default => 'content'
-  field :width
-  field :height
-  field :gallery
-  
-  GALLERIES = {
-    'content' => {:name => 'content', :type => 'collection', :variable => true},
-    'background' => {:name => 'background', :width => 1160, :height => 300, :type => 'collection', :variable => false},
-    'slideshow' => {:name => 'slideshow', :width => 600, :height => 200, :type => 'gallery', :variable => false}
-  }
-  
-  scope :by_gallery, lambda {|gallery| where(:gallery => gallery)}
-  
-  #validates_presence_of :name
-  #validates_uniqueness_of :name
-  
+  field :position
+    
   mount_uploader :file, ImageUploader
   
-  def gallery_type
-    gal = self.class::GALLERIES[gallery]
-    gal[:type]
+  def self.new_instance(params)
+    gallery_id = params[:gallery_id]
+    case gallery_id
+      when 'content' then ContentImage.new(params[:content_image])
+      when 'background' then BackgroundImage.new(params[:background_image])
+      when 'slideshow' then SlideshowImage.new(params[:slideshow_image])
+      else Image.new(params[:image])
+    end
   end
+
+  before_create :set_position
   
+  def set_position
+    self.position = gallery.max_position + 1
+  end
+
+  def self.max_position
+    existing_images = self.all.select {|image| !image.position.nil?}
+    current_highest = existing_images.map(&:position).max
+    current_highest ||= 0
+  end  
+
 end

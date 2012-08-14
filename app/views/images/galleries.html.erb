@@ -3,7 +3,7 @@
 </div>
 
 <section class="page_content">
-	<% Image::GALLERIES.each do |gallery| %>
+	<% Gallery::GALLERIES.each do |gallery| %>
 		<div class="index_item">
 			<%= link_to gallery[:name].titleize, images_path(:gallery => gallery[:name]) %>
 		</div>

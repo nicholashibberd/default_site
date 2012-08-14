@@ -1,6 +1,7 @@
 class GalleryWidget < Widget
-  has_and_belongs_to_many :images
-  
-  field :thumbnail_width, :default => 140
-  
+	field :gallery_id
+
+	def gallery
+		Gallery.find(gallery_id) 	
+	end  
 end

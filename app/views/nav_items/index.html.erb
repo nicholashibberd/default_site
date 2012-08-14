@@ -31,7 +31,7 @@
        	 type: 'post', 
          data: $('#sortable_nav_items').sortable('serialize') + '&id=<%= @nav_menu.id-%>',
          dataType: 'script', 
-         url: '/cms/nav_menus/order_nav_items'
+         url: '/admin/nav_menus/order_nav_items'
 			  })
       }	
 	})
