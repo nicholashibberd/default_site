@@ -1,6 +1,6 @@
 module ImagesHelper
-  def image_form_path(gallery, image)
-    image.new_record? ? gallery_images_path(gallery) : gallery_image_path(gallery, image)
+  def image_form_path(collection, image)
+    image.new_record? ? image_collection_images_path(collection) : image_collection_image_path(collection, image)
   end
 
   def galleries_select

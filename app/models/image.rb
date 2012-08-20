@@ -4,23 +4,18 @@ class Image
   
   field :name
   field :position
-    
-  mount_uploader :file, ImageUploader
   
-  def self.new_instance(params)
-    gallery_id = params[:gallery_id]
-    case gallery_id
-      when 'content' then ContentImage.new(params[:content_image])
-      when 'background' then BackgroundImage.new(params[:background_image])
-      when 'slideshow' then SlideshowImage.new(params[:slideshow_image])
-      else Image.new(params[:image])
-    end
+  mount_uploader :file, ImageUploader
+  belongs_to :image_collection
+  
+  def self.new_instance(collection, params)
+    collection.variable ? ContentImage.new(params[:content_image]) : GalleryImage.new(params[:gallery_image])
   end
 
   before_create :set_position
   
   def set_position
-    self.position = gallery.max_position + 1
+    self.position = Image.max_position + 1
   end
 
   def self.max_position

@@ -1,7 +1,15 @@
 class GalleriesController < AdminController
 
+	def new
+		@gallery = Gallery.new
+	end
+	
+	def edit
+		@gallery = Gallery.find_by_slug(params[:gallery_id])
+	end
+
 	def index
-		@galleries = Gallery::GALLERIES.map { |name, info| Gallery.new(info)  }
+		@galleries = Gallery.all
 	end
 
   def order_images
